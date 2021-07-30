@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+//git updated
+
+
+
 //Checking User Logged or Not
 if (empty($_SESSION['user'])) {
     header('location:index.php');
