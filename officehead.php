@@ -1,6 +1,9 @@
 <?php
 session_start();
 //Checking User Logged or Not
+
+
+
 if (empty($_SESSION['user'])) {
     header('location:index.php');
 }
@@ -20,23 +23,19 @@ if ($_SESSION['user']['role'] == 'adminthree') {
 
 
 
-//sql
+
 
 $conn = mysqli_connect("localhost", "officehead", "12345", "logindb");
 
+if (isset($_POST) && $_SESSION['user']['role'] == 'officehead') {
+    foreach ($_POST as $key => $value) {
+        $value = explode("_", $key)[0];
+        $id = explode("_", $key)[1];
+        $out = mysqli_query($conn, "UPDATE aproval SET officehead=$value WHERE id =$id");
+    }
+}
 $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=aproval.id");
-//$result = mysqli_fetch_assoc($result);
 
-
-
-// Store the submitted data sent
-// via POST method, stored 
-
-// Temporarily in $_POST structure.
-// $_SESSION['Name'] = $_GET['Name'];
-// $_SESSION['Designation'] = $_GET['Designation'];
-// $_SESSION['Unit'] = $_GET['Unit'];
-// $_SESSION['Type in your products'] = $_GET['Type in your products'];
 ?>
 <h1>Wellcome to <?php echo $_SESSION['user']['username']; ?> Page</h1>
 
@@ -128,46 +127,29 @@ $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=
                     <th>APPROVE / REJECT</th>
                 </tr>
             </thead>
-            <!-- <tfoot>
-            <tr>
-                <td colspan="10">
-                    <div class="links"><a href="#">&laquo;</a> <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">&raquo;</a></div>
-                </td>
-            </tr>
-        </tfoot> -->
             <tbody>
                 <?php
-
                 while ($row = mysqli_fetch_array($result)) {
-
-
-
                 ?>
-                    <!-- <tr>
-                    <td>cell1_1</td>
-                    <td>cell2_1</td>
-                    <td>cell3_1</td>
-                    <td>cell4_1</td>
-                    <td>sasdsdsasadasd</td>
-                    <td>cell6_1</td>
-                    <td>cell7_1</td>
-                    <td>cell8_1</td>
-                    <td>cell8_1</td> -->
+
                     <tr>
                         <th><?php echo $row["id"] ?></th>
                         <th><?php echo $row["Item"] ?></th>
                         <th><?php echo $row["Size_Specifications"] ?></th>
                         <th><?php echo $row["Quantity"] ?></th>
                         <th><?php echo $row["Amount"] ?></th>
-                        <th><?php echo $row["officehead"] ?></th>
-                        <th><?php echo $row["admin_3"] ?></th>
-                        <th><?php echo $row["admin_2"] ?></th>
-                        <th><?php echo $row["admin_1"] ?></th>
+                        <th bgcolor="<?php echo (($row["officehead"] == 1) ? 'green' : (($row["officehead"] == -1) ? 'red' : 'white')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <th bgcolor="<?php echo (($row["admin_3"] == 1) ? 'green' : (($row["admin_3"] == -1) ? 'red' : 'white')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <th bgcolor="<?php echo (($row["admin_2"] == 1) ? 'green' : (($row["admin_2"] == -1) ? 'red' : 'white')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <th bgcolor="<?php echo (($row["admin_1"] == 1) ? 'green' : (($row["admin_1"] == -1) ? 'red' : 'white')) ?>">
+                            <<?php echo (($row["admin_1"] == 1) ? 'APPROVED' : (($row["admin_1"] == -1) ? 'REJECTED' : 'PENDING')) ?>< /th>
                         <th>
-                            <div class="w3-section">
-                                <button class="w3-button w3-green">APPROVE</button>
-                                <button class="w3-button w3-red">REJECT</button>
-                            </div>
+                            <form method="post" action="officehead.php">
+                                <div class="w3-section">
+                                    <button name="1 <?php echo ($row["id"]) ?>" class="w3-button w3-green" <?php echo ($row["officehead"] == 1) ? 'disabled' : '' ?>>APPROVE</button>
+                                    <button name="-1 <?php echo ($row["id"]) ?>" class="w3-button w3-red" <?php echo ($row["officehead"] == -1) ? 'disabled' : '' ?>>REJECT</button>
+                                </div>
+                            </form>
                         </th>
                     </tr>
                     </tr>
