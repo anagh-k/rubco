@@ -45,221 +45,179 @@ if (isset($_POST['send'])) {
 
 ?>
 
+<html>
 
 
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  * {
-    box-sizing: border-box
-  }
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap.min.css" crossorigin="anonymous" />
 
-    {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  <style>
+    /* .top {
+      text-align: center;
+      position: fixed !important;
+      width: 100%;
+      z-index: 1;
 
-  h1 {
-    width: 100%;
-    background-color: #FF0000;
-    text-align: center;
-    color: white;
+    }
 
-  }
+    .topfixed {
+      overflow: auto;
+      height: 170;
+    }
 
-  a {}
-</style>
+    thead {
+      position: sticky;
+      top: 140;
+      z-index: 1;
+    } */
 
 
-<div class="navbar">
 
-  <h1>Rubco<h1>
 
-</div>
+    .flex-center {
+      position: fixed;
+      width: 100%;
+      height: 10%;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 1;
+    }
+
+    thead {
+      position: sticky;
+      width: 100%;
+      left: 0;
+      right: 0;
+      top: 25%;
+      z-index: 1;
+    }
+
+    .add {
+      position: fixed;
+      background-color: white;
+      width: 100%;
+      height: 20%;
+      padding: 10;
+    }
+
+    .tableClass {
+      padding: 20;
+      margin-top: 20;
+      position: relative;
+      top: 20%;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+</head>
 
 <body>
-  <center>
-    <h2>Wellcome to <?php echo $_SESSION['user']['username']; ?> Page</h2>
-
-
-    <link rel="stylesheet" href="style.css" type="text/css" />
-    <div id="profile">
-      <h2>User name is: <?php echo $_SESSION['user']['username']; ?> and Your Role is :<?php echo $_SESSION['user']['role']; ?></h2>
-  </center>
-  <!DOCTYPE html>
-  <html>
-
-  <body>
-
-    <center>
-      <h2>Amount Adding Form</h2>
-    </center>
-
-
-
-    <form action="" method="POST">
-      <div class="container" style="background-color:#f1f1f1">
-        <center><label for="Item">Item:</label>
-          <input type="text" id="Item" name="Item" value=""><br>
-          <label for="Size_Specification">Size_Specification:</label>
-          <input type="text" id="Size_Specification" name="Size_Specification" value=""><br>
-          <label for="Quantity">Quantity:</label>
-          <input type="text" id="Quantity" name="Quantity" value=""><br><br>
-
-          <label for="Amount list">Type in your Amounts:</label><br>
-          <textarea id="w3review" name="Amount" rows="20" cols="50">
-
-
-  </textarea><br>
-          <input color:green type="submit" value="Submit" name="send">
-        </center>
-    </form>
-
-    <center>
-      <p>If you click the "Submit" button, the form will be sent to a officehead.</p>
-    </center>
-
-
-    <!--  -->
-
-
-    <?php
-
-    $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=aproval.id");
-
-    ?>
-    <h1>Wellcome to <?php echo $_SESSION['user']['username']; ?> Page</h1>
-
-
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <div id="profile">
-
-      <style>
-        table.redTable {
-          font-family: "Trebuchet MS", Helvetica, sans-serif;
-          border: 2px solid #A40808;
-          background-color: #EEE7DB;
-          width: 100%;
-          text-align: center;
-          border-collapse: collapse;
-        }
-
-        table.redTable td,
-        table.redTable th {
-          border: 1px solid #AAAAAA;
-          padding: 5px 2px;
-        }
-
-        table.redTable tbody td {
-          font-size: 13px;
-        }
-
-        table.redTable tr:nth-child(even) {
-          background: #F5C8BF;
-        }
-
-        table.redTable thead {
-          background: #A40808;
-        }
-
-        table.redTable thead th {
-          font-size: 19px;
-          font-weight: bold;
-          color: #FFFFFF;
-          text-align: center;
-          border-left: 2px solid #A40808;
-        }
-
-        table.redTable thead th:first-child {
-          border-left: none;
-        }
-
-        table.redTable tfoot {
-          font-size: 13px;
-          font-weight: bold;
-          color: #FFFFFF;
-          background: #A40808;
-        }
-
-        table.redTable tfoot td {
-          font-size: 13px;
-        }
-
-        table.redTable tfoot .links {
-          text-align: right;
-        }
-
-        table.redTable tfoot .links a {
-          display: inline-block;
-          background: #FFFFFF;
-          color: #A40808;
-          padding: 2px 8px;
-          border-radius: 5px;
-        }
-      </style>
-
-      <div style="padding: 20;">
-
-        <table class="redTable" style="height: 110px;" width="519">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Size_Specifications</th>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Amount</th>
-              <th>officehead</th>
-              <th>admin_3</th>
-              <th>admin_2</th>
-              <th>admin_1</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            while ($row = mysqli_fetch_array($result)) {
-            ?>
-
-              <tr>
-                <th><?php echo $row["id"] ?></th>
-                <th><?php echo $row["Item"] ?></th>
-                <th><?php echo $row["Size_Specifications"] ?></th>
-                <th><?php echo $row["Quantity"] ?></th>
-                <th><?php echo $row["Amount"] ?></th>
-                <th bgcolor="<?php echo (($row["officehead"] == 1) ? 'green' : (($row["officehead"] == -1) ? 'red' : 'white')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                <th bgcolor="<?php echo (($row["admin_3"] == 1) ? 'green' : (($row["admin_3"] == -1) ? 'red' : 'white')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                <th bgcolor="<?php echo (($row["admin_2"] == 1) ? 'green' : (($row["admin_2"] == -1) ? 'red' : 'white')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                <th bgcolor="<?php echo (($row["admin_1"] == 1) ? 'green' : (($row["admin_1"] == -1) ? 'red' : 'white')) ?>">
-                  <?php echo (($row["admin_1"] == 1) ? 'APPROVED' : (($row["admin_1"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-              </tr>
-              </tr>
-            <?php } ?>
-          </tbody>
-        </table>
 
 
 
 
-        <table class="tg">
-          <thead>
-          </thead>
-        </table>
+  <div class="flex-center">
 
+    <div class="top">
+
+      <nav class="navbar navbar-dark bg-dark navbar-fixed-top" style="height:70; align-content: center">
+        <a class="navbar-brand">
+          <img src="rubco.jpg" height="50" class="d-inline-block align-center" alt="" style="padding-bottom: 10" />
+          <span class="navbar-text navbar-light h1" style="color: white">
+            Rubco
+          </span></a>
+        <form class="form-inline align-top" style="padding-top: 10" action="logout.php">
+
+          <div class="d-flex flex-column bd-highlight mb-0" style="padding-right: 50; color: white">
+            <div class="p-2 bd-highlight" style="height: 30">USER: <?php echo $_SESSION['user']['username']; ?></div>
+            <div class="p-2 bd-highlight">ROLE: <?php echo $_SESSION['user']['role']; ?></div>
+          </div>
+
+          <button class="btn btn-outline-danger my-2 my-sm-0 padd" type="Logout">
+            Logout
+          </button>
+        </form>
+      </nav>
+
+
+
+
+
+
+      <?php
+
+      $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=aproval.id");
+
+      ?>
+
+
+
+
+      <div class="add">
+        <tr>
+          <form class="form-inline p-3" method="POST">
+            <td> <input class="form-control m-2" type="text" id="Item" name="Item" placeholder="Item"></td>
+            <td> <input class="form-control m-2" type="text" id="Size_Specification" name="Size_Specification" placeholder="Size_specifications"></td>
+            <td> <input class="form-control m-2" type="text" id="Quantity" name="Quantity" placeholder="Quantity"></td>
+            <td> <input class="form-control m-2" type="text" id="Amount" name="Amount" placeholder="Amount"></td>
+            <td> <button type="submit" class="btn btn-primary m-2" name="send">Add New</button></td>
+          </form>
+        </tr>
       </div>
 
     </div>
-
-
-
-    <!--  -->
-
-
-
-
-
-
-
-
-  </body>
-
-  </html>
-  <div id="logout"><a href="logout.php">Please Click To Logout </div>
   </div>
+
+  <div class="tableClass">
+
+    <table class="table table-striped table-warning table-hover " style="word-break: break-all;">
+      <thead class="bg-warning">
+        <tr class="table-active">
+          <th scope="col">ID</th>
+          <th scope="col">Item</th>
+          <th scope="col">Size_Specifications</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Amount</th>
+          <th scope="col">officehead</th>
+          <th scope="col">admin_3</th>
+          <th scope="col">admin_2</th>
+          <th scope="col">admin_1</th>
+        </tr>
+      </thead>
+      <tbody>
+
+
+        <?php
+        while ($row = mysqli_fetch_array($result)) {
+        ?>
+
+          <tr>
+            <td scope="row"><?php echo $row["id"] ?></th>
+            <td><?php echo $row["Item"] ?></th>
+            <td><?php echo $row["Size_Specifications"] ?></th>
+            <td><?php echo $row["Quantity"] ?></th>
+            <td><?php echo $row["Amount"] ?></th>
+            <td class="bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+            <td class="bg-<?php echo (($row["admin_3"] == 1) ? 'success' : (($row["admin_3"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+            <td class="bg-<?php echo (($row["admin_2"] == 1) ? 'success' : (($row["admin_2"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+            <td class="bg-<?php echo (($row["admin_1"] == 1) ? 'success' : (($row["admin_1"] == -1) ? 'danger' : 'light')) ?>">
+              <?php echo (($row["admin_1"] == 1) ? 'APPROVED' : (($row["admin_1"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+
+
+    <thead>
+    </thead>
+    </table>
+
+  </div>
+
+</body>
+
+</html>
