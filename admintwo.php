@@ -18,16 +18,16 @@ if ($_SESSION['user']['role'] == 'adminthree') {
     header('location:adminthree.php');
 }
 
-$conn = mysqli_connect("localhost", "admin_2", "12345", "logindb");
+$conn = mysqli_connect("localhost", "root", "", "logindb");
 
 if (isset($_POST) && $_SESSION['user']['role'] == 'admintwo') {
     foreach ($_POST as $key => $value) {
         $value = explode("_", $key)[0];
         $id = explode("_", $key)[1];
-        $out = mysqli_query($conn, "UPDATE aproval SET admin_2=$value WHERE id =$id");
+        $out = mysqli_query($conn, "UPDATE aproval SET admin_2=$value WHERE empID =$id");
     }
 }
-$result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=aproval.id");
+$result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID");
 
 ?>
 
@@ -96,19 +96,16 @@ $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=
 
     <div class="tableClass" style="padding: 20">
 
-        <table class="table table-striped table-warning table-hover " style="word-break: break-all">
+        <table class="table table-striped table-warning table-hover table-bordered table-sm " style="word-break: break-all">
             <thead class="bg-warning">
                 <tr class="table-active">
                     <th scope="col">ID</th>
-                    <th scope="col">Size_Specifications</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">officehead</th>
-                    <th scope="col">admin_3</th>
-                    <th scope="col">admin_2</th>
-                    <th scope="col">admin_1</th>
-                    <th scope="col">APPROVE / REJECT</th>
+                    <th scope="col">Employee Name</th>
+                    <th scope="col" class="col-1">officehead</th>
+                    <th scope="col" class="col-1">admin_3</th>
+                    <th scope="col" class="col-1">admin_2</th>
+                    <th scope="col" class="col-1">admin_1</th>
+                    <th scope="col" class="col-2">APPROVE / REJECT</th>
                 </tr>
             </thead>
             <tbody>
@@ -117,21 +114,18 @@ $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=
                 ?>
 
                     <tr>
-                        <td scope="row" id="<?php echo $row["id"] ?>"><?php echo $row["id"] ?></th>
-                        <td><?php echo $row["Item"] ?></th>
-                        <td><?php echo $row["Size_Specifications"] ?></th>
-                        <td><?php echo $row["Quantity"] ?></th>
-                        <td><?php echo $row["Amount"] ?></th>
-                        <td class="bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="bg-<?php echo (($row["admin_3"] == 1) ? 'success' : (($row["admin_3"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="bg-<?php echo (($row["admin_2"] == 1) ? 'success' : (($row["admin_2"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="bg-<?php echo (($row["admin_1"] == 1) ? 'success' : (($row["admin_1"] == -1) ? 'danger' : 'light')) ?>">
+                        <td scope="row" id="<?php echo $row["empID"] ?>"><?php echo $row["empID"] ?></th>
+                        <td><?php echo $row["employeeName"] ?></th>
+                        <td class="text-center bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row["admin_3"] == 1) ? 'success' : (($row["admin_3"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row["admin_2"] == 1) ? 'success' : (($row["admin_2"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row["admin_1"] == 1) ? 'success' : (($row["admin_1"] == -1) ? 'danger' : 'light')) ?>">
                             <?php echo (($row["admin_1"] == 1) ? 'APPROVED' : (($row["admin_1"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
                         <td>
                             <form method="post" action="admintwo.php">
                                 <div>
-                                    <button class="btn btn-success" name="1 <?php echo ($row["id"]) ?>" class="w3-button w3-green" <?php echo ($row["admin_2"] == 1) ? 'disabled' : '' ?>>APPROVE</button>
-                                    <button class="btn btn-danger" name="-1 <?php echo ($row["id"]) ?>" class="w3-button w3-red" <?php echo ($row["admin_2"] == -1) ? 'disabled' : '' ?>>REJECT</button>
+                                    <button class="btn btn-success" name="1 <?php echo ($row["empID"]) ?>" class="w3-button w3-green" <?php echo ($row["admin_2"] == 1) ? 'disabled' : '' ?>>APPROVE</button>
+                                    <button class="btn btn-danger" name="-1 <?php echo ($row["empID"]) ?>" class="w3-button w3-red" <?php echo ($row["admin_2"] == -1) ? 'disabled' : '' ?>>REJECT</button>
                                 </div>
                             </form>
                         </td>

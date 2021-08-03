@@ -35,6 +35,18 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
 <html>
 
 <head>
+    <Script>
+        function pop_up(url) {
+            window.open(url, 'win2', 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no')
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById(<?php echo ($id) ?>).scrollIntoView({
+                block: "center"
+            });
+        });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap.min.css" crossorigin="anonymous" />
     <style>
@@ -45,7 +57,7 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
             left: 0;
             right: 0;
             top: 0;
-            z-index: 1;
+            z-index: 1s;
         }
 
         thead {
@@ -95,16 +107,16 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
 
     <div class="tableClass" style="padding: 20">
 
-        <table class="table table-striped table-warning table-hover " style="word-break: break-all">
+        <table class="table table-striped table-warning table-hover table-sm table-borderd" style="word-break: break-all">
             <thead class="bg-warning">
                 <tr class="table-active">
                     <th scope="col">ID</th>
                     <th scope="col">Employee Name</th>
-                    <th scope="col">officehead</th>
-                    <th scope="col">admin_3</th>
-                    <th scope="col">admin_2</th>
-                    <th scope="col">admin_1</th>
-                    <th scope="col">APPROVE / REJECT</th>
+                    <th scope="col" class="col-1">officehead</th>
+                    <th scope="col" class="col-1">admin_3</th>
+                    <th scope="col" class="col-1">admin_2</th>
+                    <th scope="col" class="col-1">admin_1</th>
+                    <th scope="col" class="col-2">APPROVE / REJECT</th>
                 </tr>
             </thead>
             <tbody>
@@ -114,11 +126,13 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
 
                     <tr>
                         <td scope="row" id="<?php echo $row["empID"] ?>"><?php echo $row["empID"] ?></th>
-                        <td><?php echo $row["employeeName"] ?></th>
-                        <td class="bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="bg-<?php echo (($row["admin_3"] == 1) ? 'success' : (($row["admin_3"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="bg-<?php echo (($row["admin_2"] == 1) ? 'success' : (($row["admin_2"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="bg-<?php echo (($row["admin_1"] == 1) ? 'success' : (($row["admin_1"] == -1) ? 'danger' : 'light')) ?>">
+                        <td><a onclick="pop_up('view.php?id=<?php echo $row['empID'] ?>')">
+                                <?php echo ($row['employeeName']) ?>
+                            </a></th>
+                        <td class="text-center bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row["admin_3"] == 1) ? 'success' : (($row["admin_3"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row["admin_2"] == 1) ? 'success' : (($row["admin_2"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row["admin_1"] == 1) ? 'success' : (($row["admin_1"] == -1) ? 'danger' : 'light')) ?>">
                             <?php echo (($row["admin_1"] == 1) ? 'APPROVED' : (($row["admin_1"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
                         <td>
                             <form method="post" action="adminthree.php">
@@ -134,13 +148,10 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
         </table>
     </div>
 
+
+
 </body>
-<Script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById(<?php echo ($id) ?>).scrollIntoView({
-            block: "center"
-        });
-    });
-</script>
+
+
 
 </html>

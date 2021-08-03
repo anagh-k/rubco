@@ -1,123 +1,77 @@
 <?php
-echo print_r($_POST);
-if (isset($_POST['submit'])) {
-    foreach ($_POST as $name => $item) {
-        if ($name != 'submit') {
-            for ($m = 0; $m < sizeof($item); $m++) {
-                echo ($name . ' ' . $item[$m] . '<br>');
-            }
-        }
-    }
-}
+
+$result = "hellow";
 ?>
 
 <html>
 
 <head>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap.min.css">
+
+  <style>
+    .form {
+
+      padding-bottom: 30;
+      margin: auto;
+
+    }
+  </style>
+
 </head>
 
 <body>
+  <a onclick="pop_up('view.php')"> hello</a>
+  <div onclick="pop_up('view.php')" style="width: 100; height:100;background-color:red">
+    Launch demo modal</div>
+  <table class="table table-striped table-warning table-hover table-sm table-borderd" style="word-break: break-all">
+    <thead class="bg-warning">
+      <tr class="table-active">
+        <th scope="col">ID</th>
+        <th scope="col"><a onclick="pop_up('view.php')">
+            Launch demo modal
+          </a></th>
+        <th onclick="pop_up('view.php')" scope="col" class="col-1">officehead</th>
+        <th scope="col" class="col-1">admin_3</th>
+        <th scope="col" class="col-1">admin_2</th>
+        <th scope="col" class="col-1">admin_1</th>
+        <th scope="col" class="col-2">APPROVE / REJECT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      while ($result) {
+      ?>
 
-    <form method="post" action="test.php">
-        <!-- <div>
-            <div>
-                <p>
-                    <label id="hello" class="reg_label" for="field_name">Item:</label>
-                    <input class="text_area" name="field_name[]" type="text" id="testing" tabindex="98" style="width: 150px;" />
-                </p>
-            </div>
-        </div>
-        <input type="button" id="btnDel" value="Remove" class="someClass2" disabled /><br><br> -->
+        <tr>
+          <td scope="row" id="<?php echo $row["empID"] ?>"><?php echo $row["empID"] ?></th>
+          <td>
+            </th>
+          <td class="text-center bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+          <td class="text-center bg-<?php echo (($row["admin_3"] == 1) ? 'success' : (($row["admin_3"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+          <td class="text-center bg-<?php echo (($row["admin_2"] == 1) ? 'success' : (($row["admin_2"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+          <td class="text-center bg-<?php echo (($row["admin_1"] == 1) ? 'success' : (($row["admin_1"] == -1) ? 'danger' : 'light')) ?>">
+            <?php echo (($row["admin_1"] == 1) ? 'APPROVED' : (($row["admin_1"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+          <td>
+            <form method="post" action="adminthree.php">
+              <div>
+                <button class="btn btn-success" name="1 <?php echo ($row["empID"]) ?>" class="w3-button w3-green" <?php echo ($row["admin_3"] == 1) ? 'disabled' : '' ?>>APPROVE</button>
+                <button class="btn btn-danger" name="-1 <?php echo ($row["empID"]) ?>" class="w3-button w3-red" <?php echo ($row["admin_3"] == -1) ? 'disabled' : '' ?>>REJECT</button>
+              </div>
+            </form>
+          </td>
+        </tr>
+      <?php $result = 0;
+      } ?>
+    </tbody>
+  </table>
 
-        <input type="button" id="btnAdd" value="Add" class="someClass1" onclick="add()" />
 
-
-
-
-        <table class="table table-striped table-warning align-content-center w-100" id="addProducts">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Size_Specifications</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row"><input class="form-control-plaintext border-secondary border-top-0" name="id_0"></td>
-                    <td scope="row"><input class="form-control-plaintext border-secondary border-top-0" name="item_0"></td>
-                    <td scope="row"><input class="form-control-plaintext border-secondary border-top-0" name="size_0"></td>
-                    <td scope="row"><input class="form-control-plaintext border-secondary border-top-0" name="quantity_0"></td>
-                    <td scope="row"><input class="form-control-plaintext border-secondary border-top-0" name="amount_0"></td>
-                </tr>
-            </tbody>
-        </table>
 </body>
-
-<input type="submit" id="submit" name="submit" value="Submit">
-</form>
 <script>
-    // var j = 0;
-    // $(document).ready(function() {
-    //     $('.someClass1').click(function(e) {
-
-    //         var num = $(this).prev().children().length;
-    //         var newNum = new Number(num + 1);
-
-    //         var newElem = $(this).prev().children(':last').clone().attr('id', 'input' + newNum);
-
-    //         if (newElem.children().children().last().hasClass('otherOption')) {
-    //             newElem.children().children().last().remove();
-    //         }
-
-    //         newElem.children().children().each(function() {
-    //             var curName = $(this).attr('name');
-    //             var newName = '';
-    //             $(this).attr('id', 'name' + num + '_' + j);
-    //             j++;
-    //         });
-
-    //         newElem.children().children().each(function() {
-    //             $(this).removeAttr('value');
-    //         });
-
-    //         $(this).prev().children(':last').after(newElem);
-
-    //         $(this).next().removeAttr('disabled');
-    //     });
-
-    //     $('.someClass2').click(function(e) {
-    //         var num = $(this).prev().prev().children().length;
-
-    //         $(this).prev().prev().children(':last').remove();
-    //         if (num - 1 == 1) $(this).attr('disabled', 'disabled');
-    //     });
-    // });
-
-
-
-
-    var count = 1;
-
-    function add() {
-        var table = document.getElementById("addProducts");
-        var len = table.rows[0].cells.length;
-        var row = table.insertRow(1);
-        var cell0 = row.insertCell(0);
-        var cell1 = row.insertCell(1);
-        var cell2 = row.insertCell(2);
-        var cell3 = row.insertCell(3);
-        var cell4 = row.insertCell(4);
-        cell0.innerHTML = "<input class='form-control-plaintext border-secondary border-top-0' name='id_" + count + "'>";
-        cell1.innerHTML = "<input class='form-control-plaintext border-secondary border-top-0' name='Item_" + count + "'>";
-        cell2.innerHTML = "<input class='form-control-plaintext border-secondary border-top-0' name='size_" + count + "'>";
-        cell3.innerHTML = "<input class='form-control-plaintext border-secondary border-top-0' name='quantity_" + count + "'>";
-        cell4.innerHTML = "<input class='form-control-plaintext border-secondary border-top-0' name='amount_" + count + "'>";
-        count++;
-    }
+  function pop_up(url) {
+    window.open(url, 'win2', 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no')
+  }
 </script>
 
 </html>
