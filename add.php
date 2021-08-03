@@ -7,26 +7,27 @@ session_start();
 
 
 
+
 //Checking User Logged or Not
 if (empty($_SESSION['user'])) {
     header('location:index.php');
 }
 //Restrict User or Moderator to Access Admin.php page
-if ($_SESSION['user']['role'] == 'officehead') {
-    header('location:officehead.php');
-}
-if ($_SESSION['user']['role'] == 'adminone') {
-    header('location:adminone.php');
-}
-if ($_SESSION['user']['role'] == 'admintwo') {
-    header('location:admintwo.php');
-}
-if ($_SESSION['user']['role'] == 'adminthree') {
-    header('location:adminthree.php');
-}
+// if ($_SESSION['user']['role'] == 'officehead') {
+//     header('location:officehead.php');
+// }
+// if ($_SESSION['user']['role'] == 'adminone') {
+//     header('location:adminone.php');
+// }
+// if ($_SESSION['user']['role'] == 'admintwo') {
+//     header('location:admintwo.php');
+// }
+// if ($_SESSION['user']['role'] == 'adminthree') {
+//     header('location:adminthree.php');
+// }
 
 
-
+//72d38236dfd808eb6bbf
 if (isset($_POST["submit"])) {
     $conn = mysqli_connect("localhost", "root", "", "logindb");
     $Nameofemployee = mysqli_real_escape_string($conn, $_POST['Nameofemployee']);
@@ -37,17 +38,22 @@ if (isset($_POST["submit"])) {
     $radio = mysqli_real_escape_string($conn, $_POST['radio']);
     $purposeofproduct = mysqli_real_escape_string($conn, $_POST['purposeofproduct']);
     $scaleofpay = mysqli_real_escape_string($conn, $_POST['Scaleofpay']);
-    $result = mysqli_query($conn, "INSERT INTO `employee` VALUES ('', '$Nameofemployee', '$Designation','$scaleofpay', '$dateofjoining', '$unit', '$department', '$radio', '$purposeofproduct') ");
-    $id = mysqli_query($conn, "SELECT MAX(empID) as mx FROM employee");
+    $unique = md5(uniqid(rand(), true));
+    $result = mysqli_query($conn, "INSERT INTO `employee` VALUES ('', '$Nameofemployee', '$Designation','$scaleofpay', '$dateofjoining', '$unit', '$department', '$radio', '$purposeofproduct','$unique') ");
+    $id = mysqli_query($conn, "SELECT empID FROM employee WHERE key_id  = '$unique' ");
     $id = mysqli_fetch_assoc($id);
-    $id = $id['mx'];
+    $id = $id['empID'];
     $table = $_POST['product'];
-    foreach ($table as $key => $val) {
-        $item = mysqli_real_escape_string($conn, $val['item']);
-        $size = mysqli_real_escape_string($conn, $val['size']);
-        $quantity = mysqli_real_escape_string($conn, $val['quantity']);
-        $amount = mysqli_real_escape_string($conn, $val['amount']);
-        $result = mysqli_query($conn, "INSERT INTO `form` VALUES ('$id', '$item','$size', '$quantity', '$amount') ");
+    if (count($table) == 1 && empty($table['0']['item'])) {
+    } else {
+
+        foreach ($table as $key => $val) {
+            $item = mysqli_real_escape_string($conn, $val['item']);
+            $size = mysqli_real_escape_string($conn, $val['size']);
+            $quantity = mysqli_real_escape_string($conn, $val['quantity']);
+            $amount = mysqli_real_escape_string($conn, $val['amount']);
+            $result = mysqli_query($conn, "INSERT INTO `form` VALUES ('$id', '$item','$size', '$quantity', '$amount') ");
+        }
     }
 }
 ?>
@@ -68,7 +74,7 @@ if (isset($_POST["submit"])) {
             left: 0;
             right: 0;
             top: 0;
-            z-index: 1;
+            z-index: -1;
         }
 
         .form {

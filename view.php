@@ -159,17 +159,17 @@ $employee = mysqli_fetch_assoc($employee);
 
                         <tr>
                             <th scope="col" class="col-1">officehead</th>
-                            <th scope="col" class="col-1">admin_3</th>
-                            <th scope="col" class="col-1">admin_2</th>
-                            <th scope="col" class="col-1">admin_1</th>
+                            <th scope="col" class="col-1">adminthree</th>
+                            <th scope="col" class="col-1">admintwo</th>
+                            <th scope="col" class="col-1">adminone</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><?php echo (($employee["officehead"] == 1) ? 'APPROVED' : (($employee["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
-                            <td><?php echo (($employee["admin_3"] == 1) ? 'APPROVED' : (($employee["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
-                            <td><?php echo (($employee["admin_2"] == 1) ? 'APPROVED' : (($employee["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
-                            <td><?php echo (($employee["admin_1"] == 1) ? 'APPROVED' : (($employee["admin_1"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
+                            <td><?php echo (($employee["adminthree"] == 1) ? 'APPROVED' : (($employee["adminthree"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
+                            <td><?php echo (($employee["admintwo"] == 1) ? 'APPROVED' : (($employee["admintwo"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
+                            <td><?php echo (($employee["adminone"] == 1) ? 'APPROVED' : (($employee["adminone"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
                         </tr>
                     </tbody>
 

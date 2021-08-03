@@ -20,7 +20,7 @@ if ($_SESSION['user']['role'] == 'admintwo') {
 
 $conn = mysqli_connect("localhost", "root", "", "logindb");
 
-
+$id = 0;
 if (isset($_POST) && $_SESSION['user']['role'] == 'adminthree') {
     foreach ($_POST as $key => $value) {
         $value = explode("_", $key)[0];
@@ -41,11 +41,14 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
         }
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById(<?php echo ($id) ?>).scrollIntoView({
-                block: "center"
+        try {
+
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("<?php echo ($id) ?>").scrollIntoView({
+                    block: "center"
+                });
             });
-        });
+        } catch {}
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap.min.css" crossorigin="anonymous" />
@@ -57,7 +60,7 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
             left: 0;
             right: 0;
             top: 0;
-            z-index: 1s;
+            z-index: 1;
         }
 
         thead {

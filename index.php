@@ -21,21 +21,22 @@ if (isset($_POST['login'])) {
 
       $role = $_SESSION['user']['role'];
       //Redirecting User Based on Role
-      switch ($role) {
-        case 'clerk':
-          header('location:add.php');
-          break;
-        case 'officehead':
-          header('location:officehead.php');
-        case 'adminone':
-          header('location:adminone.php');
-        case 'admintwo':
-          header('location:admintwo.php');
-          break;
-        case 'adminthree':
-          header('location:adminthree.php');
-          break;
-      }
+      header('location:data.php');
+      // switch ($role) {
+      //   case 'clerk':
+      //     header('location:add.php');
+      //     break;
+      //   case 'officehead':
+      //     header('location:officehead.php');
+      //   case 'adminone':
+      //     header('location:adminone.php');
+      //   case 'admintwo':
+      //     header('location:admintwo.php');
+      //     break;
+      //   case 'adminthree':
+      //     header('location:adminthree.php');
+      //     break;
+      // }
     } else {
       $error = 1;
     }

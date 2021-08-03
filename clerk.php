@@ -114,15 +114,15 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
 
   <div class="tableClass">
 
-    <table class="table table-striped table-warning table-hover " style="word-break: break-all;">
+    <table class="table table-striped table-warning table-hover table-bordered " style="word-break: break-all;">
       <thead class="bg-warning">
         <tr class="table-active">
           <th scope="col">ID</th>
           <th scope="col">Employee Name</th>
           <th scope="col">officehead</th>
-          <th scope="col">admin_3</th>
-          <th scope="col">admin_2</th>
-          <th scope="col">admin_1</th>
+          <th scope="col">adminthree</th>
+          <th scope="col">admintwo</th>
+          <th scope="col">adminone</th>
         </tr>
       </thead>
       <tbody>
@@ -136,10 +136,10 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
             <td scope="row"><?php echo $row["empID"] ?></th>
             <td><?php echo $row["employeeName"] ?></th>
             <td class="bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-            <td class="bg-<?php echo (($row["admin_3"] == 1) ? 'success' : (($row["admin_3"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-            <td class="bg-<?php echo (($row["admin_2"] == 1) ? 'success' : (($row["admin_2"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-            <td class="bg-<?php echo (($row["admin_1"] == 1) ? 'success' : (($row["admin_1"] == -1) ? 'danger' : 'light')) ?>">
-              <?php echo (($row["admin_1"] == 1) ? 'APPROVED' : (($row["admin_1"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+            <td class="bg-<?php echo (($row["adminthree"] == 1) ? 'success' : (($row["adminthree"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["adminthree"] == 1) ? 'APPROVED' : (($row["adminthree"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+            <td class="bg-<?php echo (($row["admintwo"] == 1) ? 'success' : (($row["admintwo"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admintwo"] == 1) ? 'APPROVED' : (($row["admintwo"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+            <td class="bg-<?php echo (($row["adminone"] == 1) ? 'success' : (($row["adminone"] == -1) ? 'danger' : 'light')) ?>">
+              <?php echo (($row["adminone"] == 1) ? 'APPROVED' : (($row["adminone"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
           </tr>
         <?php } ?>
       </tbody>
