@@ -26,7 +26,7 @@ if ($_SESSION['user']['role'] == 'adminthree') {
     header('location:adminthree.php');
 }
 
-$conn = mysqli_connect("localhost", "admin_1", "12345", "logindb");
+$conn = mysqli_connect("localhost", "root", "", "logindb");
 
 
 
@@ -35,10 +35,11 @@ if (isset($_POST) && $_SESSION['user']['role'] == 'adminone') {
     foreach ($_POST as $key => $value) {
         $value = explode("_", $key)[0];
         $id = explode("_", $key)[1];
-        $out = mysqli_query($conn, "UPDATE aproval SET admin_1=$value WHERE id =$id");
+        $out = mysqli_query($conn, "UPDATE aproval SET admin_1=$value WHERE empID =$id");
     }
 }
-$result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=aproval.id");
+$result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID");
+
 
 ?>
 <html>
@@ -108,10 +109,7 @@ $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=
             <thead class="bg-warning">
                 <tr class="table-active">
                     <th scope="col">ID</th>
-                    <th scope="col">Size_Specifications</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Employee Name</th>
                     <th scope="col">officehead</th>
                     <th scope="col">admin_3</th>
                     <th scope="col">admin_2</th>
@@ -125,11 +123,8 @@ $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=
                 ?>
 
                     <tr>
-                        <td scope="row" id="<?php echo $row["id"] ?>"><?php echo $row["id"] ?></th>
-                        <td><?php echo $row["Item"] ?></th>
-                        <td><?php echo $row["Size_Specifications"] ?></th>
-                        <td><?php echo $row["Quantity"] ?></th>
-                        <td><?php echo $row["Amount"] ?></th>
+                        <td scope="row" id="<?php echo $row["empID"] ?>"><?php echo $row["empID"] ?></th>
+                        <td><?php echo $row["employeeName"] ?></th>
                         <td class="bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
                         <td class="bg-<?php echo (($row["admin_3"] == 1) ? 'success' : (($row["admin_3"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_3"] == 1) ? 'APPROVED' : (($row["admin_3"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
                         <td class="bg-<?php echo (($row["admin_2"] == 1) ? 'success' : (($row["admin_2"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admin_2"] == 1) ? 'APPROVED' : (($row["admin_2"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
@@ -138,8 +133,8 @@ $result = mysqli_query($conn, "SELECT * FROM form INNER JOIN aproval on form.id=
                         <td>
                             <form method="post" action="adminone.php">
                                 <div>
-                                    <button class="btn btn-success" name="1 <?php echo ($row["id"]) ?>" class="w3-button w3-green" <?php echo ($row["admin_1"] == 1) ? 'disabled' : '' ?>>APPROVE</button>
-                                    <button class="btn btn-danger" name="-1 <?php echo ($row["id"]) ?>" class="w3-button w3-red" <?php echo ($row["admin_1"] == -1) ? 'disabled' : '' ?>>REJECT</button>
+                                    <button class="btn btn-success" name="1 <?php echo ($row["empID"]) ?>" class="w3-button w3-green" <?php echo ($row["admin_1"] == 1) ? 'disabled' : '' ?>>APPROVE</button>
+                                    <button class="btn btn-danger" name="-1 <?php echo ($row["empID"]) ?>" class="w3-button w3-red" <?php echo ($row["admin_1"] == -1) ? 'disabled' : '' ?>>REJECT</button>
                                 </div>
                             </form>
                         </td>

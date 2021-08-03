@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
       //Redirecting User Based on Role
       switch ($role) {
         case 'clerk':
-          header('location:clerk.php');
+          header('location:add.php');
           break;
         case 'officehead':
           header('location:officehead.php');
