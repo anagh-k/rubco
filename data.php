@@ -8,18 +8,12 @@ if (empty($_SESSION['user'])) {
 if ($_SESSION['user']['role'] == 'clerk') {
     header('location:add.php');
 }
-// if ($_SESSION['user']['role'] == 'officehead') {
-//     header('location:officehead.php');
-// }
-// if ($_SESSION['user']['role'] == 'adminone') {
-//     header('location:adminone.php');
-// }
-// if ($_SESSION['user']['role'] == 'admintwo') {
-//     header('location:admintwo.php');
-// }
+
+
 $user = $_SESSION['user']['role'];
-echo $user;
 $conn = mysqli_connect("localhost", "root", "", "logindb");
+
+
 
 $id = 0;
 if (isset($_POST) && $_SESSION['user']['role'] == $user) {
@@ -116,10 +110,10 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
                 <tr class="table-active">
                     <th scope="col">ID</th>
                     <th scope="col">Employee Name</th>
-                    <th scope="col" class="col-1">officehead</th>
-                    <th scope="col" class="col-1">adminthree</th>
-                    <th scope="col" class="col-1">admintwo</th>
-                    <th scope="col" class="col-1">adminone</th>
+                    <th scope="col" class="col-1"><?php echo $_SESSION['user']['users']['1'] ?></th>
+                    <th scope="col" class="col-1"><?php echo $_SESSION['user']['users']['4'] ?></th>
+                    <th scope="col" class="col-1"><?php echo $_SESSION['user']['users']['3'] ?></th>
+                    <th scope="col" class="col-1"><?php echo $_SESSION['user']['users']['2'] ?></th>
                     <th scope="col" class="col-2">APPROVE / REJECT</th>
                 </tr>
             </thead>

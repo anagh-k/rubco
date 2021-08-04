@@ -13,18 +13,25 @@ if (isset($_POST['login'])) {
     $row = mysqli_fetch_assoc($result);
     $count = mysqli_num_rows($result);
     if ($count == 1) {
+      $roles = array();
+      $result = mysqli_query($conn, "SELECT role FROM user ");
+      while ($role = mysqli_fetch_assoc($result)) {
+        array_push($roles, $role['role']);
+      }
       $_SESSION['user'] = array(
         'username' => $row['username'],
         'password' => $row['password'],
-        'role' => $row['role']
+        'role' => $row['role'],
+        'users' => $roles
       );
+      echo print_r($_SESSION);
 
       $role = $_SESSION['user']['role'];
       //Redirecting User Based on Role
       header('location:data.php');
       // switch ($role) {
       //   case 'clerk':
-      //     header('location:add.php');
+      //    header('location:add.php');
       //     break;
       //   case 'officehead':
       //     header('location:officehead.php');
