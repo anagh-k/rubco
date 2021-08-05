@@ -23,7 +23,7 @@ if (isset($_POST) && $_SESSION['user']['role'] == $user) {
         $out = mysqli_query($conn, "UPDATE aproval SET $user=$value WHERE empID=$id");
     }
 }
-$result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID");
+$result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID ORDER by employee.empID DESC");
 
 
 ?>

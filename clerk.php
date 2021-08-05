@@ -28,7 +28,8 @@ if ($_SESSION['user']['role'] == 'adminthree') {
 
 
 $conn = mysqli_connect('localhost', 'root', '', 'logindb');
-$result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID");
+$result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID ORDER by employee.empID DESC");
+
 
 
 ?>
