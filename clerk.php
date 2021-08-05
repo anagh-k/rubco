@@ -78,6 +78,11 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
       height: 100%;
     }
   </style>
+  <Script>
+    function pop_up(url) {
+      window.open(url, 'win2', 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no')
+    }
+  </script>
 
 </head>
 
@@ -134,7 +139,7 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
 
           <tr>
             <td scope="row"><?php echo $row["empID"] ?></th>
-            <td><?php echo $row["employeeName"] ?></th>
+            <td style="cursor:pointer" onClick="pop_up('view.php?id=<?php echo $row["empID"] ?>')"><?php echo $row["employeeName"] ?></th>
             <td class="bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
             <td class="bg-<?php echo (($row["adminthree"] == 1) ? 'success' : (($row["adminthree"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["adminthree"] == 1) ? 'APPROVED' : (($row["adminthree"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
             <td class="bg-<?php echo (($row["admintwo"] == 1) ? 'success' : (($row["admintwo"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admintwo"] == 1) ? 'APPROVED' : (($row["admintwo"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
