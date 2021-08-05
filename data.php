@@ -124,7 +124,7 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
 
                     <tr>
                         <td scope="row" id="<?php echo $row["empID"] ?>"><?php echo $row["empID"] ?></th>
-                        <td onclick="pop_up('view.php?id=<?php echo $row['empID'] ?>')">
+                        <td style="cursor: pointer;" onclick="pop_up('view.php?id=<?php echo $row['empID'] ?>')">
                             <?php echo ($row['employeeName']) ?>
                             </th>
                         <td class="text-center bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
