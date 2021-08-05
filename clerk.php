@@ -102,30 +102,31 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
 
 
 
-  <div class="flex-center">
+  <div>
 
+    <div class="flex-center">
 
+      <nav class="navbar navbar-dark bg-dark" style=" align-content: center ;height:80">
+        <a class="navbar-brand">
+          <img src="rubco.jpg" height="50" class="d-inline-block align-center" alt="" style="padding-bottom: 10" />
+          <span class="navbar-text navbar-light h1" style="color: white">
+            Rubco
+          </span></a>
+        <form class="form-inline" style="padding-top: 10" action="logout.php">
 
-    <nav class="navbar navbar-dark bg-dark navbar-fixed-top" style="height:70; align-content: center">
-      <a class="navbar-brand">
-        <img src="rubco.jpg" height="50" class="d-inline-block align-center" alt="" style="padding-bottom: 10" />
-        <span class="navbar-text navbar-light h1" style="color: white">
-          Rubco
-        </span></a>
-      <form class="form-inline align-top" style="padding-top: 10" action="logout.php">
+          <div class="d-inline-block " style=" color: white">
+            <div class="bd-highlight pr-3 ">USER: <?php echo $_SESSION['user']['username']; ?></div>
+            <div class="bd-highlight pr-3">ROLE: <?php echo $_SESSION['user']['role']; ?></div>
+          </div>
+          <div class="d-inline-block">
 
-        <div class="d-flex flex-column bd-highlight mb-0" style="padding-right: 50; color: white">
-          <div class="p-2 bd-highlight" style="height: 30">USER: <?php echo $_SESSION['user']['username']; ?></div>
-          <div class="p-2 bd-highlight">ROLE: <?php echo $_SESSION['user']['role']; ?></div>
-        </div>
-
-        <button class="btn btn-outline-danger my-2 my-sm-0 padd" type="Logout">
-          Logout
-        </button>
-      </form>
-    </nav>
-
-
+            <button class="btn btn-outline-danger" type="Logout">
+              Logout
+            </button>
+          </div>
+        </form>
+      </nav>
+    </div>
   </div>
 
   <div class="tableClass">
