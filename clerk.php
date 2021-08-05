@@ -83,6 +83,16 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
       window.open(url, 'win2', 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no')
     }
   </script>
+  <script>
+    try {
+
+      document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("<?php echo ($id) ?>").scrollIntoView({
+          block: "center"
+        });
+      });
+    } catch {}
+  </script>
 
 </head>
 
