@@ -25,6 +25,12 @@ if (empty($_SESSION['user'])) {
 // if ($_SESSION['user']['role'] == 'adminthree') {
 //     header('location:adminthree.php');
 // }
+$conn = mysqli_connect("localhost", "root", "", "logindb");
+for ($i = 0; $i < 50; $i = $i + 1) {
+
+
+    $result = mysqli_query($conn, "INSERT INTO `employee` VALUES ('', 'hello', 'asdasd','scaleofpay', 'dateofjoining', 'unit', 'department', 'radio', 'purposeofproduct','unique') ");
+}
 
 
 //72d38236dfd808eb6bbf
