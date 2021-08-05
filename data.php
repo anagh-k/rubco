@@ -5,7 +5,7 @@ if (empty($_SESSION['user'])) {
     header('location:index.php');
 }
 // //Restrict User or Moderator to Access Admin.php page
-if ($_SESSION['user']['role'] == 'clerk') {
+if ($_SESSION['user']['role'] == 'User') {
     header('location:add.php');
 }
 
@@ -127,11 +127,11 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
                         <td style="cursor: pointer;" onclick="pop_up('view.php?id=<?php echo $row['empID'] ?>')">
                             <?php echo ($row['employeeName']) ?>
                             </th>
-                        <td class="text-center bg-<?php echo (($row["officehead"] == 1) ? 'success' : (($row["officehead"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["officehead"] == 1) ? 'APPROVED' : (($row["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="text-center bg-<?php echo (($row["adminthree"] == 1) ? 'success' : (($row["adminthree"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["adminthree"] == 1) ? 'APPROVED' : (($row["adminthree"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="text-center bg-<?php echo (($row["admintwo"] == 1) ? 'success' : (($row["admintwo"] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row["admintwo"] == 1) ? 'APPROVED' : (($row["admintwo"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
-                        <td class="text-center bg-<?php echo (($row["adminone"] == 1) ? 'success' : (($row["adminone"] == -1) ? 'danger' : 'light')) ?>">
-                            <?php echo (($row["adminone"] == 1) ? 'APPROVED' : (($row["adminone"] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row[$_SESSION['user']['users']['1']] == 1) ? 'success' : (($row[$_SESSION['user']['users']['1']] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row[$_SESSION['user']['users']['1']] == 1) ? 'APPROVED' : (($row[$_SESSION['user']['users']['1']] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row[$_SESSION['user']['users']['4']] == 1) ? 'success' : (($row[$_SESSION['user']['users']['4']] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row[$_SESSION['user']['users']['4']] == 1) ? 'APPROVED' : (($row[$_SESSION['user']['users']['4']] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row[$_SESSION['user']['users']['3']] == 1) ? 'success' : (($row[$_SESSION['user']['users']['3']] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row[$_SESSION['user']['users']['3']] == 1) ? 'APPROVED' : (($row[$_SESSION['user']['users']['3']] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
+                        <td class="text-center bg-<?php echo (($row[$_SESSION['user']['users']['2']] == 1) ? 'success' : (($row[$_SESSION['user']['users']['2']] == -1) ? 'danger' : 'light')) ?>">
+                            <?php echo (($row[$_SESSION['user']['users']['2']] == 1) ? 'APPROVED' : (($row[$_SESSION['user']['users']['2']] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
                         <td>
                             <form method="post" action="data.php">
                                 <div>

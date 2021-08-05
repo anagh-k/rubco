@@ -24,7 +24,6 @@ if (isset($_POST['login'])) {
         'role' => $row['role'],
         'users' => $roles
       );
-      echo print_r($_SESSION);
 
       $role = $_SESSION['user']['role'];
       //Redirecting User Based on Role
