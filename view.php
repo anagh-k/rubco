@@ -158,18 +158,18 @@ $employee = mysqli_fetch_assoc($employee);
                     <thead>
 
                         <tr>
-                            <th scope="col" class="col-1">officehead</th>
-                            <th scope="col" class="col-1">adminthree</th>
-                            <th scope="col" class="col-1">admintwo</th>
-                            <th scope="col" class="col-1">adminone</th>
+                            <th scope="col" class="col-1"><?php echo $_SESSION['user']['users']['1'] ?></th>
+                            <th scope="col" class="col-1"><?php echo $_SESSION['user']['users']['4'] ?></th>
+                            <th scope="col" class="col-1"><?php echo $_SESSION['user']['users']['3'] ?></th>
+                            <th scope="col" class="col-1"><?php echo $_SESSION['user']['users']['2'] ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo (($employee["officehead"] == 1) ? 'APPROVED' : (($employee["officehead"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
-                            <td><?php echo (($employee["adminthree"] == 1) ? 'APPROVED' : (($employee["adminthree"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
-                            <td><?php echo (($employee["admintwo"] == 1) ? 'APPROVED' : (($employee["admintwo"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
-                            <td><?php echo (($employee["adminone"] == 1) ? 'APPROVED' : (($employee["adminone"] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
+                            <td><?php echo (($employee[$_SESSION['user']['users']['1']] == 1) ? 'APPROVED' : (($employee[$_SESSION['user']['users']['1']] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
+                            <td><?php echo (($employee[$_SESSION['user']['users']['4']] == 1) ? 'APPROVED' : (($employee[$_SESSION['user']['users']['4']] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
+                            <td><?php echo (($employee[$_SESSION['user']['users']['3']] == 1) ? 'APPROVED' : (($employee[$_SESSION['user']['users']['3']] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
+                            <td><?php echo (($employee[$_SESSION['user']['users']['2']] == 1) ? 'APPROVED' : (($employee[$_SESSION['user']['users']['2']] == -1) ? 'REJECTED' : 'PENDING')) ?></td>
                         </tr>
                     </tbody>
 
