@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2021 at 04:47 PM
+-- Generation Time: Aug 06, 2021 at 05:13 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -32,13 +32,12 @@ CREATE TABLE `aproval` (
   `Admin` tinyint(1) NOT NULL,
   `Edp` tinyint(1) NOT NULL,
   `Md` tinyint(1) NOT NULL,
-  `Hoadmin` tinyint(1) NOT NULL
+  `HoAdmin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `aproval`
 --
-
 
 
 -- --------------------------------------------------------
@@ -108,9 +107,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 (1, 'user', 'user123', 'User'),
 (2, 'admin', 'Admin123', 'Admin'),
-(3, 'edp', 'edp123', 'Edp'),
-(4, 'md', 'md123', 'Md'),
-(5, 'hoadmin', 'ho123', 'Hoadmin');
+(8, 'md', 'md123', 'Md'),
+(7, 'edp', 'edp123', 'Edp'),
+(6, 'hoadmin', 'ho123', 'HoAdmin');
 
 --
 -- Indexes for dumped tables
@@ -148,19 +147,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `aproval`
 --
 ALTER TABLE `aproval`
-  MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=627;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=627;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
