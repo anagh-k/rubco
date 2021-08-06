@@ -23,7 +23,20 @@ if (isset($_POST) && $_SESSION['user']['role'] == $user) {
         $out = mysqli_query($conn, "UPDATE aproval SET $user=$value WHERE empID=$id");
     }
 }
-$result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID ORDER by employee.empID DESC");
+switch ($_SESSION['user']['role']) {
+    case 'Admin':
+        $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID ORDER by employee.empID DESC");
+        break;
+    case 'HoAdmin':
+        $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID WHERE aproval.Admin=1 ORDER by employee.empID DESC");
+        break;
+    case 'Edp':
+        $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID WHERE aproval.Hoadmin=1 ORDER by employee.empID DESC");
+        break;
+    case 'Md':
+        $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID WHERE aproval.Edp=1 ORDER by employee.empID DESC");
+        break;
+}
 
 
 ?>
@@ -34,16 +47,12 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
         function pop_up(url) {
             window.open(url, 'win2', 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no')
         }
-    </script>
-    <script>
-        try {
 
-            document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("<?php echo ($id) ?>").scrollIntoView({
-                    block: "center"
-                });
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("<?php echo ($id) ?>").scrollIntoView({
+                block: "center"
             });
-        } catch {}
+        });
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap.min.css" crossorigin="anonymous" />
@@ -121,11 +130,13 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
             </thead>
             <tbody>
                 <?php
+                $count = 0;
                 while ($row = mysqli_fetch_array($result)) {
+                    $count++
                 ?>
 
                     <tr>
-                        <td scope="row" id="<?php echo $row["empID"] ?>"><?php echo $row["empID"] ?></th>
+                        <td scope="row" id="<?php echo $row["empID"] ?>"><?php echo $count ?></th>
                         <td style="cursor: pointer;" onclick="pop_up('view.php?id=<?php echo $row['empID'] ?>')">
                             <?php echo ($row['employeeName']) ?>
                             </th>

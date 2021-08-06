@@ -84,16 +84,6 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
       window.open(url, 'win2', 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no')
     }
   </script>
-  <script>
-    try {
-
-      document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("<?php echo ($id) ?>").scrollIntoView({
-          block: "center"
-        });
-      });
-    } catch {}
-  </script>
 
 </head>
 
@@ -146,11 +136,13 @@ $result = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on empl
 
 
         <?php
+        $count = 0;
         while ($row = mysqli_fetch_array($result)) {
+          $count++;
         ?>
 
           <tr>
-            <td scope="row"><?php echo $row["empID"] ?></th>
+            <td scope="row"><?php echo $count ?></th>
             <td style="cursor:pointer" onClick="pop_up('view.php?id=<?php echo $row["empID"] ?>')"><?php echo $row["employeeName"] ?></th>
             <td class="text-center bg-<?php echo (($row[$_SESSION['user']['users']['1']] == 1) ? 'success' : (($row[$_SESSION['user']['users']['1']] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row[$_SESSION['user']['users']['1']] == 1) ? 'APPROVED' : (($row[$_SESSION['user']['users']['1']] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
             <td class="text-center bg-<?php echo (($row[$_SESSION['user']['users']['4']] == 1) ? 'success' : (($row[$_SESSION['user']['users']['4']] == -1) ? 'danger' : 'light')) ?>"><?php echo (($row[$_SESSION['user']['users']['4']] == 1) ? 'APPROVED' : (($row[$_SESSION['user']['users']['4']] == -1) ? 'REJECTED' : 'PENDING')) ?></th>
