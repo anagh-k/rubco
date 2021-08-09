@@ -5,7 +5,7 @@ session_start();
 
 $id = $_GET['id'];
 $conn = mysqli_connect("localhost", "root", "", "logindb");
-$employee = mysqli_query($conn, "SELECT * FROM employee INNER JOIN aproval on employee.empID=aproval.empID");
+$employee = mysqli_query($conn, "SELECT * FROM employee WHERE empID=$id");
 $products = mysqli_query($conn, "SELECT * FROM  `form` WHERE empID=$id");
 $employee = mysqli_fetch_assoc($employee);
 
